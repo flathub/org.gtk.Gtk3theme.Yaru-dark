@@ -59,9 +59,9 @@
       ],
       "sources": [
         {
-          "type": "archive",
-          "url": "https://github.com/ubuntu/yaru/archive/18.10.6.tar.gz",
-          "sha256": "2374303c753d14f2176018f556d5a599bc5080909763260a5ac3bd23742df48d"
+          "type": "git",
+          "url": "https://github.com/ubuntu/yaru.git",
+          "commit": "8513153559954f3a0e9786a1f4f04619ca2c88f3"
         },
         {
           "type": "shell",
