@@ -53,15 +53,11 @@
         "prefix": "/usr/share/runtime",
         "append-path": "/usr/share/runtime/share/themes/Yaru-dark/gtk-3.0/bin"
       },
-      "post-install": [
-        "rm $FLATPAK_DEST/assets # Remove broken symlink and copy actual files",
-        "cp -aL $FLATPAK_BUILDER_BUILDDIR/gtk/src/light/gtk-3.0/assets $FLATPAK_DEST/assets"
-      ],
       "sources": [
         {
-          "type": "archive",
-          "url": "https://github.com/ubuntu/yaru/archive/18.10.6.tar.gz",
-          "sha256": "2374303c753d14f2176018f556d5a599bc5080909763260a5ac3bd23742df48d"
+          "type": "git",
+          "url": "https://github.com/ubuntu/yaru.git",
+          "commit": "r28"
         },
         {
           "type": "shell",
@@ -69,6 +65,23 @@
           "commands": [
             "sed -i -e \"s/subdir('icons')//\" -e \"s/subdir('sounds')//\" -e \"s/subdir('gnome-shell')//\" -e \"s/subdir('sessions')//\" meson.build"
           ]
+        },
+        {
+           "type": "shell",
+            "//": "Build dark theme only",
+            "commands": [
+              "sed -i -e \"s/subdir('light')//\" gtk/src/meson.build"
+            ]
+        },
+        {
+            "type": "shell",
+            "//": "Copy all content from light to dark folder and change build targets accordingly",
+            "commands": [
+              "rm -r gtk/src/dark/gtk-3.0",
+              "cp -r gtk/src/light/gtk-3.20 gtk/src/dark/gtk-3.0",
+              "sed -i -e 's/light-gtk/dark-gtk/' -e 's/gtk-3.20/gtk-3.0/' gtk/src/dark/gtk-3.0/meson.build",
+              "sed -i -e 's/light/dark/' gtk/src/dark/gtk-3.0/gtk.scss"
+            ]
         }
       ]
     },
