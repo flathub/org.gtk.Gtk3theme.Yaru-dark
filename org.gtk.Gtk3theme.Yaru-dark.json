@@ -55,9 +55,8 @@
       },
       "sources": [
         {
-          "type": "git",
-          "url": "https://github.com/ubuntu/yaru.git",
-          "commit": "r28"
+          "type": "dir",
+          "path": "../yaru"
         },
         {
           "type": "shell",
@@ -67,21 +66,17 @@
           ]
         },
         {
-           "type": "shell",
-            "//": "Build dark theme only",
-            "commands": [
-              "sed -i -e \"s/subdir('light')//\" gtk/src/meson.build"
-            ]
-        },
-        {
             "type": "shell",
-            "//": "Copy all content from light to dark folder and change build targets accordingly",
+            "//": "Rename gtk-3.20 folder as gtk-3.0, and modify meson.build accordingly",
             "commands": [
+              "sed -i -e \"s/subdir('default')//\" gtk/src/meson.build",
+              "sed -i -e \"s/subdir('light')//\" gtk/src/meson.build",
               "rm -r gtk/src/dark/gtk-3.0",
-              "cp -r gtk/src/light/gtk-3.20 gtk/src/dark/gtk-3.0",
-              "sed -i -e 's/light-gtk/dark-gtk/' -e 's/gtk-3.20/gtk-3.0/' gtk/src/dark/gtk-3.0/meson.build",
-              "sed -i -e 's/light/dark/' gtk/src/dark/gtk-3.0/gtk.scss"
-            ]
+              "mv gtk/src/dark/gtk-3.20 gtk/src/dark/gtk-3.0",
+              "sed -i -e \"s/subdir('gtk-3.0')//\" gtk/src/dark/meson.build",
+              "sed -i -e \"s/subdir('gtk-3.20')/subdir('gtk-3.0')/\" gtk/src/dark/meson.build",
+              "sed -i -e \"s/gtk-3.20/gtk-3.0/\" gtk/src/dark/gtk-3.0/meson.build"
+          ]
         }
       ]
     },
