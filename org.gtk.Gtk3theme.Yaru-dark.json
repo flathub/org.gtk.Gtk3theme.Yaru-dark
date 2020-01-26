@@ -51,26 +51,19 @@
       "buildsystem": "meson",
       "build-options": {
         "prefix": "/usr/share/runtime",
-        "append-path": "/usr/share/runtime/share/themes/Yaru-dark/gtk-3.0/bin"
+        "append-path": "/usr/share/runtime/share/themes/Yaru-dark/gtk-3.0/bin",
+        "config-opts": [ "-Dicons=false", "-Dgnome-shell=false", "-Dsounds=false", "-Dsessions=false", "-Ddefault=false", "-Dlight=false"  ]
       },
       "sources": [
         {
-          "type": "dir",
-          "path": "../yaru"
-        },
-        {
-          "type": "shell",
-          "//": "Disable building everything not used",
-          "commands": [
-            "sed -i -e \"s/subdir('icons')//\" -e \"s/subdir('sounds')//\" -e \"s/subdir('gnome-shell')//\" -e \"s/subdir('sessions')//\" meson.build"
-          ]
+          "type": "git",
+          "url": "https://github.com/ubuntu/yaru.git",
+          "commit": "b768e58e4e3ad4abeaebb04fd63bc5d0f2342477"
         },
         {
             "type": "shell",
             "//": "Rename gtk-3.20 folder as gtk-3.0, and modify meson.build accordingly",
             "commands": [
-              "sed -i -e \"s/subdir('default')//\" gtk/src/meson.build",
-              "sed -i -e \"s/subdir('light')//\" gtk/src/meson.build",
               "rm -r gtk/src/dark/gtk-3.0",
               "mv gtk/src/dark/gtk-3.20 gtk/src/dark/gtk-3.0",
               "sed -i -e \"s/subdir('gtk-3.0')//\" gtk/src/dark/meson.build",
