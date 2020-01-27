@@ -2,7 +2,7 @@
   "id": "org.gtk.Gtk3theme.Yaru-dark",
   "branch": "3.22",
   "runtime": "org.freedesktop.Platform",
-  "runtime-version": "1.6",
+  "runtime-version": "19.08",
   "sdk": "org.freedesktop.Sdk",
   "build-extension": true,
   "appstream-compose": false,
@@ -51,37 +51,25 @@
       "buildsystem": "meson",
       "build-options": {
         "prefix": "/usr/share/runtime",
-        "append-path": "/usr/share/runtime/share/themes/Yaru-dark/gtk-3.0/bin"
+        "append-path": "/usr/share/runtime/share/themes/Yaru-dark/gtk-3.0/bin",
+        "config-opts": [ "-Dicons=false", "-Dgnome-shell=false", "-Dsounds=false", "-Dsessions=false", "-Ddefault=false", "-Dlight=false"  ]
       },
       "sources": [
         {
           "type": "git",
           "url": "https://github.com/ubuntu/yaru.git",
-          "commit": "r28"
-        },
-        {
-          "type": "shell",
-          "//": "Disable building everything not used",
-          "commands": [
-            "sed -i -e \"s/subdir('icons')//\" -e \"s/subdir('sounds')//\" -e \"s/subdir('gnome-shell')//\" -e \"s/subdir('sessions')//\" meson.build"
-          ]
-        },
-        {
-           "type": "shell",
-            "//": "Build dark theme only",
-            "commands": [
-              "sed -i -e \"s/subdir('light')//\" gtk/src/meson.build"
-            ]
+          "commit": "b768e58e4e3ad4abeaebb04fd63bc5d0f2342477"
         },
         {
             "type": "shell",
-            "//": "Copy all content from light to dark folder and change build targets accordingly",
+            "//": "Rename gtk-3.20 folder as gtk-3.0, and modify meson.build accordingly",
             "commands": [
               "rm -r gtk/src/dark/gtk-3.0",
-              "cp -r gtk/src/light/gtk-3.20 gtk/src/dark/gtk-3.0",
-              "sed -i -e 's/light-gtk/dark-gtk/' -e 's/gtk-3.20/gtk-3.0/' gtk/src/dark/gtk-3.0/meson.build",
-              "sed -i -e 's/light/dark/' gtk/src/dark/gtk-3.0/gtk.scss"
-            ]
+              "mv gtk/src/dark/gtk-3.20 gtk/src/dark/gtk-3.0",
+              "sed -i -e \"s/subdir('gtk-3.0')//\" gtk/src/dark/meson.build",
+              "sed -i -e \"s/subdir('gtk-3.20')/subdir('gtk-3.0')/\" gtk/src/dark/meson.build",
+              "sed -i -e \"s/gtk-3.20/gtk-3.0/\" gtk/src/dark/gtk-3.0/meson.build"
+          ]
         }
       ]
     },
