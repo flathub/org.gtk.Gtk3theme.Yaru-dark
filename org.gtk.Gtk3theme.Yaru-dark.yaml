@@ -51,7 +51,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/ubuntu/yaru.git
-        tag: 20.10.4
+        tag: 21.04.1
+        commit: 09f6c6f1ee08a9e5c84f7d3981d4c8ec132cc574
       - type: shell
         # GNOME only wants 3.0: rename gtk-3.20 folder as gtk-3.0, and modify meson.build accordingly
         commands:
