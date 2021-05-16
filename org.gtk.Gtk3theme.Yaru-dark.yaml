@@ -59,7 +59,8 @@ modules:
           - rm -r gtk/src/dark/gtk-3.0
           - mv gtk/src/dark/gtk-3.20 gtk/src/dark/gtk-3.0
           - sed -i -e "s/  '3.0,'/  '3.0'/" gtk/src/meson.build
-          - sed -i -e "s/  '3.20'//" gtk/src/meson.build
+          - sed -i -e "s/  '3.20',//" gtk/src/meson.build
+          - sed -i -e "s/  '4.0'//" gtk/src/meson.build
   - name: appdata
     buildsystem: simple
     build-commands:
