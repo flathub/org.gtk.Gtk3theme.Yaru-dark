@@ -16,8 +16,8 @@ modules:
       - '*'
     sources:
       - type: archive
-        url: https://github.com/sass/sassc/archive/3.5.0.tar.gz
-        sha256: 26f54e31924b83dd706bc77df5f8f5553a84d51365f0e3c566df8de027918042
+        url: https://github.com/sass/sassc/archive/3.6.1.tar.gz
+        sha256: 8cee391c49a102b4464f86fc40c4ceac3a2ada52a89c4c933d8348e3e4542a60
       - type: script
         dest-filename: autogen.sh
         commands:
