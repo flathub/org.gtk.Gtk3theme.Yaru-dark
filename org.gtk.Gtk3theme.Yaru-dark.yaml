@@ -1,7 +1,7 @@
 id: org.gtk.Gtk3theme.Yaru-dark
 branch: '3.22'
 runtime: org.freedesktop.Platform
-runtime-version: '19.08'
+runtime-version: '20.08'
 sdk: org.freedesktop.Sdk
 build-extension: true
 appstream-compose: false
