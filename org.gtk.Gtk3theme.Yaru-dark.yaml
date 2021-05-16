@@ -42,6 +42,8 @@ modules:
       config-opts:
         - -Dicons=false
         - -Dgnome-shell=false
+        - -Dgtksourceview=false
+        - -Dmetacity=false
         - -Dsounds=false
         - -Dsessions=false
         - -Ddefault=false
