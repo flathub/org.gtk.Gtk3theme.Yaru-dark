@@ -39,7 +39,7 @@
       "sources": [
         {
           "type": "file",
-          "path": "org.gtk.Gtk3theme.Yaru.appdata.xml"
+          "path": "org.gtk.Gtk3theme.Yaru-dark.appdata.xml"
         }
       ]
   }
